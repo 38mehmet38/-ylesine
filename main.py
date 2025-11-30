@@ -6,6 +6,7 @@ import random
 import time
 
 from collections import deque
+import pyglet
 from pyglet import image
 from pyglet.gl import *
 from pyglet.graphics import TextureGroup
@@ -899,4 +900,12 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # Catch any unhandled exceptions and write a readable traceback to error.log
+    try:
+        main()
+    except Exception:
+        import traceback
+        with open('error.log', 'w', encoding='utf-8') as f:
+            traceback.print_exc(file=f)
+        # Re-raise so PyInstaller console still shows the error if running interactively
+        raise
